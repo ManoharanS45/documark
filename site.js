@@ -8,7 +8,7 @@ async function loadStructure() {
   data.categories.forEach(category => {
 
     const categoryTitle = document.createElement("li");
-    categoryTitle.textContent = category.name;
+    categoryTitle.innerHTML = "📁 " + category.name;
     categoryTitle.style.fontWeight = "600";
     categoryTitle.style.marginTop = "15px";
     articleList.appendChild(categoryTitle);
