@@ -1,4 +1,21 @@
-let currentPublishedId = null;
+async function loadArticle() {
+  const output = document.getElementById("article-content");
+
+  try {
+    const response = await fetch("docs/getting-started.md");
+    const markdown = await response.text();
+
+    const html = marked.parse(markdown);
+    output.innerHTML = html;
+
+  } catch (error) {
+    output.innerHTML = "Failed to load article.";
+  }
+}
+
+loadArticle();
+
+/*let currentPublishedId = null;
 
 const articleList = document.getElementById("article-list");
 const output = document.getElementById("published-output");
@@ -43,3 +60,4 @@ function renderArticleList() {
 
 // Initialize
 renderArticleList();
+*/
