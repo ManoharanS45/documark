@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DocuMark Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>DocuMark</h2>
+        <button id="create-article-btn">+ Create Article</button>
+        <ul id="editor-article-list"></ul>
+    </div>
+
+    <!-- Editor Section -->
+    <div class="editor-section">
+
+        <div class="editor-top">
+            <input type="text" id="article-title" placeholder="Article Title">
+            <button id="publish-btn">Publish</button>
+        </div>
+
+        <div class="editor-preview-wrapper">
+            <textarea id="markdown-input" placeholder="Write markdown here..."></textarea>
+            <div id="preview-output"></div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Modal -->
+<div id="modal">
+    <div class="modal-content">
+        <h3>Create New Article</h3>
+        <input type="text" id="new-article-name" placeholder="Enter article name">
+        <button id="create-btn" disabled>Create</button>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="editor.js"></script>
+
+</body>
+</html>
