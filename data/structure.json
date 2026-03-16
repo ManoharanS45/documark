@@ -1,23 +1,11 @@
 {
   "categories": [
     {
-      "name": "API-documentation",
+      "name": "API Documentation",
       "articles": [
         {
           "title": "What is an API",
-          "file": "docs/API-documentation/What-is-an-API.md" 
-        },
-        {
-          "title": "REST API Basics",
-          "file": "docs/api/rest-api-basics.md"
-        },
-        {
-          "title": "Authentication",
-          "file": "docs/api/authentication.md"
-        },
-        {
-          "title": "Headers",
-          "file": "docs/api/headers.md"
+          "file": "docs/api/what-is-an-api.md"
         }
       ]
     }
