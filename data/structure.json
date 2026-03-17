@@ -1,10 +1,10 @@
 {
   "categories": [
     {
-      "name": "API Documentation",
+      "name": "API documentation",
       "articles": [
         {
-          "title": "What is an API",
+          "title": "What Is An Api",
           "file": "docs/API-documentation/what-is-an-api.md"
         }
       ]
