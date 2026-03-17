@@ -2,42 +2,70 @@ const articleList = document.getElementById("article-list");
 const output = document.getElementById("published-output");
 
 async function loadStructure() {
-  const response = await fetch("data/structure.json");
-  const data = await response.json();
+  try {
+    const response = await fetch("data/structure.json");
+    const data = await response.json();
 
-  data.categories.forEach(category => {
+    let firstArticlePath = null;
 
-    const categoryTitle = document.createElement("li");
-    categoryTitle.innerHTML = "📁 " + category.name;
-    categoryTitle.style.fontWeight = "600";
-    categoryTitle.style.marginTop = "15px";
-    articleList.appendChild(categoryTitle);
+    data.categories.forEach(category => {
 
-    category.articles.forEach(article => {
+      // Category title
+      const categoryTitle = document.createElement("li");
+      categoryTitle.textContent = "📁 " + category.name;
+      categoryTitle.style.fontWeight = "600";
+      categoryTitle.style.marginTop = "15px";
+      articleList.appendChild(categoryTitle);
 
-      const li = document.createElement("li");
-      li.textContent = article.title;
-      li.style.cursor = "pointer";
-      li.style.paddingLeft = "10px";
+      category.articles.forEach((article, index) => {
 
-      li.addEventListener("click", async () => {
+        const li = document.createElement("li");
+        li.textContent = article.title;
+        li.style.cursor = "pointer";
+        li.style.paddingLeft = "15px";
 
-        const response = await fetch(article.file);
-        const markdown = await response.text();
-        const html = marked.parse(markdown);
+        li.addEventListener("click", () => loadArticle(article.file));
 
-        output.innerHTML = html;
+        articleList.appendChild(li);
+
+        // Save first article path
+        if (!firstArticlePath) {
+          firstArticlePath = article.file;
+        }
 
       });
 
-      articleList.appendChild(li);
-
     });
 
-  });
+    // Auto load first article
+    if (firstArticlePath) {
+      loadArticle(firstArticlePath);
+    }
 
-  const firstArticle = document.querySelector("#article-list li + li");
-  if (firstArticle) firstArticle.click();
+  } catch (error) {
+    output.innerHTML = "<p>Failed to load documentation structure.</p>";
+    console.error(error);
+  }
+}
+
+async function loadArticle(filePath) {
+  try {
+    const response = await fetch(filePath);
+
+    if (!response.ok) {
+      output.innerHTML = "<p>Article not found.</p>";
+      return;
+    }
+
+    const markdown = await response.text();
+    const html = marked.parse(markdown);
+
+    output.innerHTML = html;
+
+  } catch (error) {
+    output.innerHTML = "<p>Error loading article.</p>";
+    console.error(error);
+  }
 }
 
 loadStructure();

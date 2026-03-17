@@ -5,7 +5,7 @@
       "articles": [
         {
           "title": "What is an API",
-          "file": "docs/api/what-is-an-api.md"
+          "file": "docs/API-documentation/what-is-an-api.md"
         }
       ]
     }
