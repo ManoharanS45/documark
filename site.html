@@ -11,34 +11,55 @@
 </head>
 <body>
 
-<div class="container">
+<div class="layout">
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <h2>DocuMark</h2>
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+        <div class="logo">DocuMark</div>
         <ul id="article-list"></ul>
-    </div>
+    </aside>
 
-    <!-- Content Area -->
-    <div class="editor-section">
+    <!-- MAIN ARTICLE AREA -->
+    <main class="article-container">
 
-        <div class="editor-top">
-            <h2 style="font-weight:600;"></h2>
+        <!-- Article Title -->
+        <h1 id="article-title">Select an article</h1>
+
+        <!-- Action Icons -->
+        <div class="article-actions">
+            <button onclick="showDevMsg()">🔗</button>
+            <button onclick="showDevMsg()">📤</button>
+            <button onclick="showDevMsg()">⬇️</button>
         </div>
 
-        <div style="flex:1; overflow-y:auto;">
-            <div id="published-output" style="
-                background:white;
-                padding:30px;
-                border-radius:16px;
-                box-shadow:0 10px 25px rgba(0,0,0,0.05);
-                min-height:100%;
-            ">
-                <p>Select an article to view</p>
-            </div>
+        <!-- Article Content -->
+        <div id="published-output" class="content-box">
+            <p>Select an article to view</p>
         </div>
 
-    </div>
+    </main>
+
+    <!-- RIGHT SIDE (Search + TOC + Feedback placeholder) -->
+    <aside class="right-panel">
+
+        <!-- Search -->
+        <div class="search-box">
+            <input type="text" placeholder="Search articles..." id="search-input">
+        </div>
+
+        <!-- TOC -->
+        <div class="toc-box">
+            <h3>On this page</h3>
+            <div id="toc"></div>
+        </div>
+
+        <!-- Feedback (placeholder for now) -->
+        <div class="feedback-box">
+            <h3>Feedback</h3>
+            <p style="font-size: 13px; color: gray;">Coming soon...</p>
+        </div>
+
+    </aside>
 
 </div>
 

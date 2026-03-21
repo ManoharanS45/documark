@@ -16,11 +16,12 @@ body {
 }
 
 /* ============================= */
-/* Main Layout */
+/* Main Layout (3 Column) */
 /* ============================= */
 
-.container {
-    display: flex;
+.layout {
+    display: grid;
+    grid-template-columns: 260px 1fr 280px;
     height: 100vh;
 }
 
@@ -29,280 +30,139 @@ body {
 /* ============================= */
 
 .sidebar {
-    width: 260px;
     background: linear-gradient(180deg, #6366f1, #7c3aed);
     color: white;
     padding: 20px;
-    flex-direction: column;
-}
-
-.sidebar li {
-    display: block;
-    padding: 6px 10px;
-    cursor: pointer;
-}
-
-.sidebar li:hover {
-    background: rgba(255,255,255,0.1);
-    border-radius: 6px;
-}
-.sidebar h2 {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 20px;
-}
-
-#editor-article-list {
-    list-style: none;
-    overflow-y: auto;
-    flex: 1;
-}
-
-#editor-article-list li {
-    padding: 10px 12px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    cursor: pointer;
-    transition: 0.2s ease;
-}
-
-#editor-article-list li:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
-
-/* Create Button */
-
-#create-article-btn {
-    background: white;
-    color: #6366f1;
-    border: none;
-    padding: 10px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s ease;
-    margin-bottom: 15px;
-}
-
-#create-article-btn:hover {
-    transform: translateY(-2px);
-}
-
-/* ============================= */
-/* Editor Section */
-/* ============================= */
-
-.editor-section {
-    flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 30px;
     overflow: hidden;
-}
 
-/* Top Bar */
-
-.editor-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-#article-title {
-    font-size: 22px;
-    font-weight: 600;
-    border: none;
-    outline: none;
-    background: transparent;
-    border-bottom: 2px solid #e5e7eb;
-    padding: 5px;
-    width: 50%;
-}
-
-/* Publish Button */
-
-#publish-btn {
-    background: linear-gradient(135deg, #22c55e, #16a34a);
-    border: none;
-    padding: 10px 18px;
-    border-radius: 8px;
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s ease;
-}
-
-#publish-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.3);
-}
-
-/* ============================= */
-/* Editor & Preview Layout */
-/* ============================= */
-
-.editor-preview-wrapper {
-    display: flex;
-    gap: 20px;
-    flex: 1;
-    overflow: hidden;
-}
-
-/* Editor */
-
-#markdown-input {
-    width: 50%;
-    border: none;
-    outline: none;
-    padding: 20px;
-    border-radius: 16px;
-    background: white;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-    resize: none;
-    overflow-y: auto;
-    font-size: 15px;
-}
-
-/* Preview */
-
-#preview-output {
-    width: 50%;
-    padding: 20px;
-    border-radius: 16px;
-    background: white;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-    overflow-y: auto;
-}
-
-/* ============================= */
-/* Modal */
-/* ============================= */
-
-#modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
-    display: none;
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-content {
-    background: white;
-    padding: 25px;
-    border-radius: 16px;
-    width: 320px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-}
-
-.modal-content h3 {
-    margin-bottom: 15px;
-}
-
-#new-article-name {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #e5e7eb;
-    margin-bottom: 15px;
-}
-
-#create-btn {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
-    background: linear-gradient(135deg, #6366f1, #7c3aed);
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.2s ease;
-}
-
-#create-btn:disabled {
-    background: #d1d5db;
-    cursor: not-allowed;
-}
-
-#create-btn:hover:enabled {
-    transform: translateY(-2px);
-}
-
-/* ============================= */
-/* Active Article */
-/* ============================= */
-
-.active-article {
-    background: rgba(255,255,255,0.3);
-    font-weight: 600;
-}
-
-/* ============================= */
-/* Status Badges */
-/* ============================= */
-
-/* Sidebar list item layout fix */
-#editor-article-list li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Badge spacing */
-.status-badge {
-    font-size: 11px;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-weight: 600;
-    white-space: nowrap;
-}
-.status-badge.published {
-    background: rgba(34,197,94,0.2);
-    color: #22c55e;
-}
-
-.status-badge.draft {
-    background: rgba(255,255,255,0.3);
-    color: white;
-}
-
-/* ============================= */
-/* Smooth Hover Animations */
-/* ============================= */
-
-#editor-article-list li {
-    transition: all 0.25s ease;
-}
-
-#editor-article-list li:hover {
-    transform: translateX(6px);
-}
-
-/* Buttons Animation */
-button {
-    transition: all 0.25s ease;
-}
-
-button:hover {
-    transform: translateY(-2px);
-}
-
-/* ============================= */
-/* Glass Sidebar Effect */
-/* ============================= */
-
-.sidebar {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-right: 1px solid rgba(255,255,255,0.2);
 }
 
+/* Logo */
+.logo {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Article list */
+#article-list {
+    list-style: none;
+    margin-top: 10px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+#article-list li {
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+#article-list li:hover {
+    background: rgba(255,255,255,0.15);
+    transform: translateX(5px);
+}
+
+#article-list li.active-article {
+    background: rgba(255,255,255,0.25);
+    font-weight: 600;
+}
+
 /* ============================= */
-/* Documentation Typography Fix  */
+/* Article Area */
+/* ============================= */
+
+.article-container {
+    padding: 30px;
+    overflow-y: auto;
+}
+
+/* Title */
+#article-title {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+/* Action Icons */
+.article-actions {
+    margin-bottom: 20px;
+}
+
+.article-actions button {
+    margin-right: 10px;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    background: #eee;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.article-actions button:hover {
+    transform: translateY(-2px);
+}
+
+/* Content Box */
+.content-box {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    max-width: 900px;
+}
+
+/* ============================= */
+/* Right Panel (Search + TOC + Feedback) */
+/* ============================= */
+
+.right-panel {
+    border-left: 1px solid #eee;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+}
+
+/* Search */
+.search-box input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+/* TOC */
+.toc-box h3 {
+    margin-bottom: 10px;
+}
+
+#toc div {
+    font-size: 14px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    color: #555;
+}
+
+#toc div:hover {
+    color: #000;
+}
+
+/* Feedback placeholder */
+.feedback-box {
+    margin-top: auto;
+}
+
+/* ============================= */
+/* Documentation Typography */
 /* ============================= */
 
 #published-output {
@@ -332,7 +192,7 @@ button:hover {
     margin-bottom: 10px;
 }
 
-/* Paragraph spacing */
+/* Paragraph */
 #published-output p {
     margin-bottom: 16px;
 }
@@ -346,7 +206,7 @@ button:hover {
     margin-bottom: 8px;
 }
 
-/* Horizontal rule */
+/* HR */
 #published-output hr {
     margin: 30px 0;
     border: none;
@@ -377,105 +237,4 @@ button:hover {
     padding: 3px 6px;
     border-radius: 6px;
     font-size: 14px;
-}
-/* ============================= */
-/* Editor Preview Typography     */
-/* ============================= */
-
-#preview-output {
-    max-width: 800px;
-    line-height: 1.8;
-    font-size: 16px;
-    color: #222;
-}
-
-/* Headings */
-#preview-output h1 {
-    font-size: 34px;
-    margin-bottom: 16px;
-    margin-top: 10px;
-}
-
-#preview-output h2 {
-    font-size: 24px;
-    margin-top: 28px;
-    margin-bottom: 12px;
-}
-
-#preview-output h3 {
-    font-size: 20px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-
-/* Paragraph spacing */
-#preview-output p {
-    margin-bottom: 16px;
-}
-
-/* Lists */
-#preview-output ul {
-    margin: 12px 0 20px 20px;
-}
-
-#preview-output li {
-    margin-bottom: 8px;
-}
-
-/* Horizontal rule */
-#preview-output hr {
-    margin: 30px 0;
-    border: none;
-    border-top: 1px solid #ddd;
-}
-
-/* Blockquotes */
-#preview-output blockquote {
-    margin: 20px 0;
-    padding: 12px 18px;
-    border-left: 4px solid #6C63FF;
-    background: #f5f5ff;
-    border-radius: 8px;
-}
-
-/* Code blocks */
-#preview-output pre {
-    background: #1e1e2f;
-    color: #fff;
-    padding: 16px;
-    border-radius: 12px;
-    overflow-x: auto;
-    margin: 20px 0;
-}
-
-#preview-output code {
-    background: #f0f0f0;
-    padding: 3px 6px;
-    border-radius: 6px;
-    font-size: 14px;
-}
-
-/* ============================= */
-/* Site Sidebar Spacing Fix      */
-/* ============================= */
-
-#article-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 20px;
-}
-
-#article-list li {
-    padding: 10px 14px;
-    margin-bottom: 8px;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-}
-
-#article-list li:hover {
-    background: rgba(255, 255, 255, 0.15);
-}
-
-#article-list li.active-article {
-    background: rgba(255, 255, 255, 0.25);
 }
