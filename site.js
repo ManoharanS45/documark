@@ -27,7 +27,10 @@ async function loadStructure() {
 
       /* Category Title (clickable for collapse later) */
       const categoryTitle = document.createElement("li");
-      categoryTitle.innerHTML = `📁 ${category.name} <span style="float:right;">▼</span>`;
+      categoryTitle.innerHTML = `
+  📁 ${category.name} 
+  <span style="float:right; font-size:12px; opacity:0.7;">▼</span>
+`;
       categoryTitle.style.fontWeight = "600";
       categoryTitle.style.marginTop = "15px";
       categoryTitle.style.cursor = "pointer";
