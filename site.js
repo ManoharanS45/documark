@@ -7,6 +7,10 @@ const output = document.getElementById("published-output");
 const articleTitle = document.getElementById("article-title");
 const tocContainer = document.getElementById("toc");
 
+
+/* Store all articles for search */
+let allData = null;
+
 /* ============================= */
 /* Load Structure (Sidebar) */
 /* ============================= */
@@ -15,6 +19,7 @@ async function loadStructure() {
   try {
     const response = await fetch("data/structure.json");
     const data = await response.json();
+    allData = data; // store globally
 
     let firstArticlePath = null;
 
@@ -76,6 +81,55 @@ async function loadStructure() {
     console.error(error);
   }
 }
+
+/* ============================= */
+/* Search Function */
+/* ============================= */
+
+const searchInput = document.getElementById("search-input");
+
+searchInput.addEventListener("input", function () {
+  const query = this.value.toLowerCase();
+
+  if (!allData) return;
+
+  articleList.innerHTML = "";
+
+  allData.categories.forEach(category => {
+
+    const matchedArticles = category.articles.filter(article =>
+      article.title.toLowerCase().includes(query)
+    );
+
+    if (matchedArticles.length > 0) {
+
+      const categoryTitle = document.createElement("li");
+      categoryTitle.textContent = "📁 " + category.name;
+      categoryTitle.style.fontWeight = "600";
+      categoryTitle.style.marginTop = "15px";
+
+      articleList.appendChild(categoryTitle);
+
+      matchedArticles.forEach(article => {
+        const li = document.createElement("li");
+        li.textContent = article.title;
+        li.style.paddingLeft = "15px";
+
+        li.addEventListener("click", () => loadArticle(article.file));
+
+        articleList.appendChild(li);
+      });
+
+    }
+
+  });
+
+  /* If empty search → reload full structure */
+  if (query === "") {
+    articleList.innerHTML = "";
+    loadStructure();
+  }
+});
 
 /* ============================= */
 /* Load Article */
