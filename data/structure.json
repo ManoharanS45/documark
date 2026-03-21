@@ -4,6 +4,14 @@
       "name": "API documentation",
       "articles": [
         {
+          "title": "Api Authentication",
+          "file": "docs/API-documentation/api-authentication.md"
+        },
+        {
+          "title": "Api Request Structure",
+          "file": "docs/API-documentation/api-request-structure.md"
+        },
+        {
           "title": "What Is An Api",
           "file": "docs/API-documentation/what-is-an-api.md"
         }
