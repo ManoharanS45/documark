@@ -27,7 +27,7 @@ async function loadStructure() {
 
       /* Category Title (clickable for collapse later) */
       const categoryTitle = document.createElement("li");
-      categoryTitle.textContent = "📁 " + category.name;
+      categoryTitle.innerHTML = `📁 ${category.name} <span style="float:right;">▼</span>`;
       categoryTitle.style.fontWeight = "600";
       categoryTitle.style.marginTop = "15px";
       categoryTitle.style.cursor = "pointer";
@@ -41,7 +41,7 @@ async function loadStructure() {
 
         const li = document.createElement("li");
         li.textContent = article.title;
-        li.style.paddingLeft = "15px";
+        li.style.paddingLeft = "25px";
 
         li.addEventListener("click", () => {
           loadArticle(article.file);
@@ -64,10 +64,14 @@ async function loadStructure() {
       articleList.appendChild(articleGroup);
 
       /* (Next step) Collapse logic hook */
-      categoryTitle.addEventListener("click", () => {
-        articleGroup.style.display =
-          articleGroup.style.display === "none" ? "block" : "none";
-      });
+      let isOpen = true;
+
+categoryTitle.addEventListener("click", () => {
+  isOpen = !isOpen;
+  articleGroup.style.display = isOpen ? "block" : "none";
+
+  categoryTitle.querySelector("span").textContent = isOpen ? "▼" : "▶";
+});
 
     });
 
@@ -156,7 +160,19 @@ async function loadArticle(filePath) {
     tempDiv.innerHTML = html;
 
     const h1 = tempDiv.querySelector("h1");
-    articleTitle.textContent = h1 ? h1.innerText : "Untitled Article";
+
+    if (h1) {
+      articleTitle.textContent = h1.innerText;
+    } 
+    else {
+
+      // fallback: extract from filename
+      const fileName = filePath.split("/").pop().replace(".md", "");
+      const formatted = fileName
+      .replace(/-/g, " ")
+      .replace(/\b\w/g, c => c.toUpperCase()); 
+      articleTitle.textContent = formatted;
+    }
 
     /* Generate TOC */
     generateTOC();

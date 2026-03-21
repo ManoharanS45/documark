@@ -41,6 +41,17 @@ body {
     -webkit-backdrop-filter: blur(12px);
     border-right: 1px solid rgba(255,255,255,0.2);
 }
+.search-box {
+    margin-bottom: 15px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+}
 
 /* Logo */
 .logo {
@@ -120,7 +131,7 @@ body {
 }
 
 /* ============================= */
-/* Right Panel (Search + TOC + Feedback) */
+/* Right Panel (TOC + Feedback) */
 /* ============================= */
 
 .right-panel {
@@ -132,13 +143,6 @@ body {
     overflow-y: auto;
 }
 
-/* Search */
-.search-box input {
-    width: 100%;
-    padding: 10px;
-    border-radius: 8px;
-    border: 1px solid #ddd;
-}
 
 /* TOC */
 .toc-box h3 {
