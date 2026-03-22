@@ -53,10 +53,29 @@
         </div>
 
         <!-- Feedback (placeholder for now) -->
-        <div class="feedback-box">
-            <h3>Feedback</h3>
-            <p style="font-size: 13px; color: gray;">Coming soon...</p>
-        </div>
+        <!-- Feedback Form -->
+<div class="feedback-box">
+    <h3>Feedback</h3>
+
+    <form id="feedback-form">
+        <input 
+            type="email" 
+            name="email" 
+            placeholder="Your email" 
+            required
+        >
+
+        <textarea 
+            name="message" 
+            placeholder="Your feedback..." 
+            required
+        ></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <p id="feedback-status" style="font-size:12px; margin-top:8px;"></p>
+</div>
 
     </aside>
 

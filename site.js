@@ -227,6 +227,40 @@ function showDevMsg() {
   alert("This feature is under development 🚧");
 }
 
+
+/* ============================= */
+/* Feedback Form Submission */
+/* ============================= */
+
+const feedbackForm = document.getElementById("feedback-form");
+const feedbackStatus = document.getElementById("feedback-status");
+
+feedbackForm.addEventListener("submit", async function (e) {
+  e.preventDefault();
+
+  const formData = new FormData(feedbackForm);
+
+  try {
+    const response = await fetch("https://formspree.io/f/xreyvdge", {
+      method: "POST",
+      body: formData,
+      headers: {
+        "Accept": "application/json"
+      }
+    });
+
+    if (response.ok) {
+      feedbackStatus.textContent = "✅ Feedback sent!";
+      feedbackForm.reset();
+    } else {
+      feedbackStatus.textContent = "❌ Failed to send. Try again.";
+    }
+
+  } catch (error) {
+    feedbackStatus.textContent = "⚠️ Error occurred.";
+  }
+});
+
 /* ============================= */
 /* Init */
 /* ============================= */
