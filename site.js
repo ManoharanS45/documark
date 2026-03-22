@@ -65,15 +65,14 @@ async function loadStructure() {
 
       articleList.appendChild(articleGroup);
 
-      /* (Next step) Collapse logic hook */
+      /* Collapse logic */
       let isOpen = true;
 
-categoryTitle.addEventListener("click", () => {
-  isOpen = !isOpen;
-  articleGroup.style.display = isOpen ? "block" : "none";
-
-  categoryTitle.querySelector("span").textContent = isOpen ? "▼" : "▶";
-});
+      categoryTitle.addEventListener("click", () => {
+        isOpen = !isOpen;
+        articleGroup.style.display = isOpen ? "block" : "none";
+        categoryTitle.querySelector("span").textContent = isOpen ? "▼" : "▶";
+      });
 
     });
 
@@ -138,6 +137,40 @@ searchInput.addEventListener("input", function () {
 });
 
 /* ============================= */
+/* NEW: Fetch Last Updated Date */
+/* ============================= */
+
+async function fetchLastUpdated(filePath) {
+  try {
+    const repo = "ManoharanS45/documark"; // 
+
+    const response = await fetch(
+      `https://api.github.com/repos/${repo}/commits?path=${filePath}`
+    );
+
+    const data = await response.json();
+
+    if (data && data.length > 0) {
+      const date = new Date(data[0].commit.committer.date);
+
+      const formatted = date.toLocaleDateString("en-IN", {
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      });
+
+      const el = document.getElementById("last-updated");
+      if (el) {
+        el.textContent = `Last updated: ${formatted}`;
+      }
+    }
+
+  } catch (error) {
+    console.error("Failed to fetch last updated date");
+  }
+}
+
+/* ============================= */
 /* Load Article */
 /* ============================= */
 
@@ -167,17 +200,18 @@ async function loadArticle(filePath) {
       articleTitle.textContent = h1.innerText;
     } 
     else {
-
-      // fallback: extract from filename
       const fileName = filePath.split("/").pop().replace(".md", "");
       const formatted = fileName
-      .replace(/-/g, " ")
-      .replace(/\b\w/g, c => c.toUpperCase()); 
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, c => c.toUpperCase()); 
       articleTitle.textContent = formatted;
     }
 
     /* Generate TOC */
     generateTOC();
+
+    /* ✅ NEW: Fetch Last Updated */
+    fetchLastUpdated(filePath);
 
   } catch (error) {
     output.innerHTML = "<p>Error loading article.</p>";
@@ -186,12 +220,12 @@ async function loadArticle(filePath) {
 }
 
 /* ============================= */
-/* Generate TOC (H2, H3, H4) */
+/* Generate TOC (H2, H3) */
 /* ============================= */
+
 function generateTOC() {
   tocContainer.innerHTML = "";
 
-  /* Only H2 and H3 */
   const headings = output.querySelectorAll("h2, h3");
 
   headings.forEach((heading, index) => {
@@ -201,14 +235,12 @@ function generateTOC() {
     const item = document.createElement("div");
     item.textContent = heading.innerText;
 
-    /* Apply classes instead of inline styles */
     if (heading.tagName === "H2") {
       item.classList.add("toc-h2");
     } else if (heading.tagName === "H3") {
       item.classList.add("toc-h3");
     }
 
-    /* Smooth scroll */
     item.addEventListener("click", () => {
       document.getElementById(id).scrollIntoView({
         behavior: "smooth"
@@ -226,7 +258,6 @@ function generateTOC() {
 function showDevMsg() {
   alert("This feature is under development 🚧");
 }
-
 
 /* ============================= */
 /* Feedback Form Submission */
