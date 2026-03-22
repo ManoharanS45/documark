@@ -239,8 +239,13 @@ body {
 }
 
 #published-output code {
-    background: #f0f0f0;
+    background: none;
+    color: inherit;
     padding: 3px 6px;
     border-radius: 6px;
     font-size: 14px;
+}
+pre code {
+    background: none !important;
+    color: white;
 }
