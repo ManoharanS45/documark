@@ -221,6 +221,7 @@ body {
     line-height: 1.8;
     font-size: 16px;
     color: #222;
+    overflow-x: auto;
 }
 
 /* Headings */
@@ -292,4 +293,41 @@ body {
 pre code {
     background: none !important;
     color: white;
+}
+
+/* ============================= */
+/* Markdown Table Styling */
+/* ============================= */
+
+#published-output table {
+    width: 100%;
+    border-collapse: collapse; /* removes double borders */
+    margin: 20px 0;
+    font-size: 14px;
+}
+
+/* Table header */
+#published-output th {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f5f7fb; /* subtle header bg */
+    font-weight: 600;
+}
+
+/* Table cells */
+#published-output td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    vertical-align: top;
+}
+
+/* Row spacing */
+#published-output tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+/* Optional hover effect */
+#published-output tr:hover {
+    background-color: #f1f1f1;
 }
