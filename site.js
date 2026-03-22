@@ -29,8 +29,7 @@ async function loadStructure() {
       const categoryTitle = document.createElement("li");
       categoryTitle.innerHTML = `
   📁 ${category.name} 
-  <span style="float:right; font-size:12px; opacity:0.7;">▼</span>
-`;
+  <span style="float:right; font-size:12px; opacity:0.7;">▼</span>`;
       categoryTitle.style.fontWeight = "600";
       categoryTitle.style.marginTop = "15px";
       categoryTitle.style.cursor = "pointer";
@@ -189,11 +188,11 @@ async function loadArticle(filePath) {
 /* ============================= */
 /* Generate TOC (H2, H3, H4) */
 /* ============================= */
-
 function generateTOC() {
   tocContainer.innerHTML = "";
 
-  const headings = output.querySelectorAll("h2, h3, h4");
+  /* Only H2 and H3 */
+  const headings = output.querySelectorAll("h2, h3");
 
   headings.forEach((heading, index) => {
     const id = "heading-" + index;
@@ -202,11 +201,14 @@ function generateTOC() {
     const item = document.createElement("div");
     item.textContent = heading.innerText;
 
-    /* Indentation */
-    if (heading.tagName === "H3") item.style.marginLeft = "10px";
-    if (heading.tagName === "H4") item.style.marginLeft = "20px";
+    /* Apply classes instead of inline styles */
+    if (heading.tagName === "H2") {
+      item.classList.add("toc-h2");
+    } else if (heading.tagName === "H3") {
+      item.classList.add("toc-h3");
+    }
 
-    /* Scroll on click */
+    /* Smooth scroll */
     item.addEventListener("click", () => {
       document.getElementById(id).scrollIntoView({
         behavior: "smooth"
